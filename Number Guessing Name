@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+void guessNumber() {
+    std::srand(std::time(0)); // Seed the random number generator
+    int numberToGuess = std::rand() % 100 + 1; // Generate a random number between 1 and 100
+    int userGuess;
+    bool guessed = false;
+
+    std::cout << "I have generated a random number between 1 and 100. Try to guess it!" << std::endl;
+
+    while (!guessed) {
+        std::cout << "Enter your guess: ";
+        std::cin >> userGuess;
+
+        if (std::cin.fail()) {
+            std::cin.clear(); // Clear the error flag
+            std::cin.ignore(10000, '\n'); // Ignore the rest of the input
+            std::cout << "Invalid input. Please enter an integer." << std::endl;
+            continue;
+        }
+
+        if (userGuess < numberToGuess) {
+            std::cout << "Too low! Try again." << std::endl;
+        } else if (userGuess > numberToGuess) {
+            std::cout << "Too high! Try again." << std::endl;
+        } else {
+            std::cout << "Congratulations! You've guessed the correct number." << std::endl;
+            guessed = true;
+        }
+    }
+}
+
+int main() {
+    guessNumber();
+    return 0;
+}
